@@ -18,6 +18,7 @@ class Editor(QtWidgets.QWidget):
         self.entry.setAcceptRichText(False)
         self.browser = QtWebEngineWidgets.QWebEngineView()
         self.browser.setEnabled(False)
+        self.browser.setZoomFactor(0.7)
         self.layout.addWidget(self.entry, 50)
         self.layout.addWidget(self.browser, 50)
         self.entry.textChanged.connect(self.update_webview)
@@ -39,7 +40,7 @@ class Editor(QtWidgets.QWidget):
         renderer = MathHTMLRenderer()
         mi = m.Markdown(renderer)
         html = mi(self.entry.toPlainText())
-        html = '<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=AM_CHTML"></script>' \
+        html = '<body><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=AM_CHTML"></script>' \
                + html + '</body>'
         self.browser.setHtml(html)
 
